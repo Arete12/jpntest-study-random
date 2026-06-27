@@ -68,17 +68,18 @@
     .footer-note { color:var(--muted); font-size:13px; }
 
     .result-next {
-      margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;
     }
     .result-next button {
       min-height:44px;
     }
-    .stat { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
-    .stat div { background:#f9fafb; border:1px solid var(--line); border-radius:12px; padding:10px; text-align:center; }
-    .stat b { display:block; font-size:20px; }
+    .stat { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:8px; }
+    .stat div { background:#f9fafb; border:1px solid var(--line); border-radius:10px; padding:5px 6px; text-align:center; }
+    .stat span { font-size:11px; color:var(--muted); }
+    .stat b { display:block; font-size:15px; line-height:1.2; }
     @media (max-width: 720px) {
       .controls { grid-template-columns: 1fr; }
-      .stat { grid-template-columns: 1fr; }
+      .stat { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -138,7 +139,7 @@
     <strong>使い方</strong>
     <p class="footer-note">
       問題Noを選ぶと回答は自動でクリアされます。選択肢の順番は表示上だけ変わり、判定は元データの正解に合わせて自動変換します。
-      複数回答問題は複数チェックしてください。「112問ランダム開始」を押すと、全112問を最初にシャッフルして1問ずつ出題します。判定後は結果欄の「次の問題へ」からそのまま進めます。「間違えた問題を復習」を押すと、不正解だった問題だけを見直せます。ブラウザだけで動くため、インターネット接続は不要です。
+      複数回答問題は複数チェックしてください。「112問ランダム開始」を押すと、全112問を最初にシャッフルして1問ずつ出題します。判定後は結果欄の「次の問題へ」からそのまま進めます。次の問題へ移っても自動スクロールしません。「間違えた問題を復習」を押すと、不正解だった問題だけを見直せます。ブラウザだけで動くため、インターネット接続は不要です。
     </p>
   </section>
 </main>
@@ -290,7 +291,6 @@ function originalToDisplay(originalAns) {
 
 function goNextFromResult() {
   moveInCurrentMode(1);
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function checkAnswer() {
@@ -453,7 +453,6 @@ el("clearBtn").addEventListener("click", () => { clearAnswerOnly(); hideResult()
 el("checkBtn").addEventListener("click", checkAnswer);
 el("quickNextBtn").addEventListener("click", () => {
   moveInCurrentMode(1);
-  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 el("shuffleChoices").addEventListener("change", () => renderQuestion({reshuffle:true}));
 el("resetStatsBtn").addEventListener("click", () => {
